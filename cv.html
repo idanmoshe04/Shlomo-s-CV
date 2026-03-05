@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>שלמה מרדכי לוי — HRBP</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --navy:     #1b3358;
+      --navy-lt:  #2a4a7f;
+      --teal:     #1e6b60;
+      --teal-lt:  #e8f4f2;
+      --gold:     #b5873a;
+      --gold-lt:  #f5ead8;
+      --ink:      #1a1a22;
+      --body:     #3d3d4e;
+      --muted:    #7a7d8c;
+      --border:   #e4e6ed;
+      --bg-side:  #f4f6fb;
+      --bg-page:  #eceef4;
+      --white:    #ffffff;
+    }
+
+    html { font-size: 15.5px; }
+
+    body {
+      font-family: 'Heebo', 'Arial', sans-serif;
+      background: var(--bg-page);
+      min-height: 100vh;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 44px 20px;
+    }
+
+    /* ── PAGE ── */
+    .cv {
+      width: 100%;
+      max-width: 1020px;
+      background: var(--white);
+      box-shadow: 0 8px 48px rgba(27,51,88,0.14), 0 2px 8px rgba(0,0,0,0.06);
+      border-radius: 3px;
+      overflow: hidden;
+      opacity: 0;
+      transform: translateY(14px);
+      animation: rise 0.6s cubic-bezier(.25,.7,0,1.1) 0.05s forwards;
+    }
+
+    @keyframes rise { to { opacity:1; transform:translateY(0); } }
+
+    /* ── HEADER BAND ── */
+    .cv-header {
+      background: var(--navy);
+      padding: 36px 44px 32px;
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Subtle geometric accent */
+    .cv-header::after {
+      content: '';
+      position: absolute;
+      left: -60px;
+      bottom: -60px;
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      border: 40px solid rgba(255,255,255,0.04);
+      pointer-events: none;
+    }
+
+    .photo-wrap {
+      flex-shrink: 0;
+      width: 112px;
+      height: 112px;
+      border-radius: 50%;
+      border: 3px solid var(--gold);
+      overflow: hidden;
+      position: relative;
+      z-index: 1;
+    }
+
+    .photo-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 15%;
+    }
+
+    .header-text { flex: 1; position: relative; z-index: 1; }
+
+    .hdr-name {
+      font-size: 32px;
+      font-weight: 800;
+      color: var(--white);
+      letter-spacing: 0.2px;
+      line-height: 1.1;
+    }
+
+    .hdr-role {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 7px;
+    }
+
+    .hdr-role span {
+      font-size: 15px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    .hdr-role .dot {
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: rgba(181,135,58,0.5);
+    }
+
+    .hdr-contacts {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px 22px;
+      margin-top: 16px;
+    }
+
+    .hdr-contact {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      color: rgba(255,255,255,0.72);
+      font-size: 12.5px;
+      font-weight: 400;
+      white-space: nowrap;
+    }
+
+    .hdr-contact a { color: inherit; text-decoration: none; }
+    .hdr-contact a:hover { color: var(--gold); }
+
+    .hdr-contact svg {
+      width: 13px; height: 13px;
+      fill: var(--gold);
+      flex-shrink: 0;
+      opacity: 0.9;
+    }
+
+    /* ── BODY GRID ── */
+    .cv-body {
+      display: grid;
+      grid-template-columns: 1fr 248px;
+    }
+
+    /* ── MAIN ── */
+    .cv-main {
+      padding: 36px 40px 44px;
+      border-left: 1px solid var(--border);
+    }
+
+    /* ── SIDEBAR ── */
+    .cv-side {
+      background: var(--bg-side);
+      padding: 32px 26px 36px;
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+    }
+
+    /* ── SECTION ── */
+    .section { margin-bottom: 34px; }
+    .section:last-child { margin-bottom: 0; }
+
+    .sec-label {
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 6px;
+    }
+
+    .sec-title {
+      font-size: 19px;
+      font-weight: 700;
+      color: var(--navy);
+      line-height: 1;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .sec-title::after {
+      content: '';
+      flex: 1;
+      height: 1.5px;
+      background: var(--border);
+    }
+
+    /* ── SUMMARY ── */
+    .summary {
+      font-size: 14.5px;
+      font-weight: 400;
+      line-height: 1.85;
+      color: var(--body);
+      text-align: justify;
+    }
+
+    /* ── JOBS ── */
+    .jobs { display: flex; flex-direction: column; gap: 22px; }
+
+    .job {
+      padding-right: 20px;
+      border-right: 2px solid var(--border);
+      position: relative;
+      transition: border-color 0.2s;
+    }
+
+    .job:hover { border-color: var(--teal); }
+
+    .job.current { border-color: var(--gold); }
+
+    /* dot on timeline */
+    .job::before {
+      content: '';
+      position: absolute;
+      right: -5px;
+      top: 7px;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--border);
+      border: 2px solid var(--white);
+    }
+
+    .job.current::before {
+      background: var(--gold);
+    }
+
+    .job-title {
+      font-size: 15.5px;
+      font-weight: 700;
+      color: var(--ink);
+      line-height: 1.35;
+      margin-bottom: 4px;
+    }
+
+    .job-meta {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 9px;
+    }
+
+    .job-org {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--teal);
+    }
+
+    .job-sep {
+      width: 3px;
+      height: 3px;
+      border-radius: 50%;
+      background: var(--muted);
+      opacity: 0.5;
+      flex-shrink: 0;
+    }
+
+    .job-date {
+      font-size: 11.5px;
+      font-weight: 500;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+
+    .job-badge {
+      font-size: 9.5px;
+      font-weight: 700;
+      letter-spacing: 0.4px;
+      color: var(--white);
+      background: var(--gold);
+      padding: 2px 8px;
+      border-radius: 20px;
+      white-space: nowrap;
+    }
+
+    .job-badge.award {
+      background: var(--teal);
+    }
+
+    .job-list { list-style: none; }
+
+    .job-list li {
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 1.75;
+      color: var(--body);
+      padding-right: 13px;
+      position: relative;
+      margin-bottom: 1px;
+    }
+
+    .job-list li::before {
+      content: '';
+      position: absolute;
+      right: 0;
+      top: 8px;
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: var(--teal);
+      opacity: 0.6;
+    }
+
+    /* ── SIDEBAR BLOCKS ── */
+    .side-block { }
+
+    .side-label {
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--navy);
+      margin-bottom: 14px;
+      padding-bottom: 7px;
+      border-bottom: 2px solid var(--navy);
+      display: block;
+    }
+
+    /* Education */
+    .edu-degree {
+      font-size: 14.5px;
+      font-weight: 700;
+      color: var(--ink);
+      line-height: 1.35;
+    }
+
+    .edu-inst {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--teal);
+      margin-top: 3px;
+    }
+
+    .edu-year {
+      font-size: 11px;
+      font-weight: 400;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+
+    /* Skills */
+    .skills-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .skill {
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--navy);
+      background: var(--white);
+      border: 1.5px solid var(--border);
+      padding: 3px 10px;
+      border-radius: 3px;
+      line-height: 1.5;
+      transition: all 0.18s;
+    }
+
+    .skill:hover {
+      border-color: var(--teal);
+      color: var(--teal);
+      background: var(--teal-lt);
+    }
+
+    /* Languages */
+    .lang-item { margin-bottom: 12px; }
+    .lang-item:last-child { margin-bottom: 0; }
+
+    .lang-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 5px;
+    }
+
+    .lang-name {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--ink);
+    }
+
+    .lang-lvl {
+      font-size: 10.5px;
+      font-weight: 400;
+      color: var(--muted);
+    }
+
+    .lang-bar {
+      height: 4px;
+      background: var(--border);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+
+    .lang-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--teal), var(--navy));
+      border-radius: 2px;
+      transform-origin: right;
+      animation: fillBar 1s cubic-bezier(.4,0,.2,1) 0.5s both;
+    }
+
+    @keyframes fillBar { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+
+    /* Award */
+    .award-card {
+      background: var(--gold-lt);
+      border: 1px solid rgba(181,135,58,0.3);
+      border-radius: 4px;
+      padding: 12px 14px;
+      display: flex;
+      align-items: center;
+      gap: 11px;
+    }
+
+    .award-icon {
+      font-size: 20px;
+      line-height: 1;
+      flex-shrink: 0;
+    }
+
+    .award-name {
+      font-size: 13px;
+      font-weight: 700;
+      color: #7a5c1e;
+      line-height: 1.3;
+    }
+
+    .award-detail {
+      font-size: 11px;
+      font-weight: 400;
+      color: #9a7c3a;
+      margin-top: 2px;
+    }
+
+    /* Print */
+    @media print {
+      body { background: white; padding: 0; }
+      .cv { box-shadow: none; max-width: 100%; opacity: 1; transform: none; animation: none; }
+    }
+
+    @media (max-width: 740px) {
+      .cv-body { grid-template-columns: 1fr; }
+      .cv-side { border-top: 1px solid var(--border); }
+      .cv-header { flex-direction: column; text-align: center; padding: 28px 24px; }
+      .hdr-contacts { justify-content: center; flex-direction: column; gap: 8px; align-items: center; }
+      .cv-main { padding: 28px 20px; }
+      .cv-side { padding: 24px 20px; }
+    }
+  </style>
+</head>
+<body>
+<div class="cv">
+
+  <!-- ══ HEADER ══ -->
+  <header class="cv-header">
+    <div class="photo-wrap">
+      <img src="PHOTO-2026-03-05-20-10-53.jpg" alt="שלמה מרדכי לוי">
+    </div>
+    <div class="header-text">
+      <div class="hdr-name">שלמה מרדכי לוי</div>
+      <div class="hdr-role">
+        <span>HRBP</span>
+      </div>
+      <div class="hdr-contacts">
+        <div class="hdr-contact">
+          <svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+          052-5511581
+        </div>
+        <div class="hdr-contact">
+          <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+          <a href="mailto:Shlomo.Mordechai.Levy@gmail.com">Shlomo.Mordechai.Levy@gmail.com</a>
+        </div>
+        <div class="hdr-contact">
+          <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+          גבעתיים
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ══ BODY ══ -->
+  <div class="cv-body">
+
+    <!-- MAIN -->
+    <main class="cv-main">
+
+      <!-- Summary -->
+      <section class="section">
+        <div class="sec-label">פרופיל מקצועי</div>
+        <p class="summary">
+          מנהל משאבי אנוש מנוסה בעל רקע עשיר בהובלת תהליכי HR אסטרטגיים בארגונים רחבי היקף. מומחה בליווי הנהלות כשותף עסקי (HRBP), הובלת שינויים ארגוניים וניהול ביצועים מבוסס נתונים (KPIs). בעל מיומנות מוכחת בבניית מערכי גיוס, שימור ופיתוח מנהלים, תוך חיבור מדויק בין היעדים העסקיים לרווחת ההון האנושי. מאמין ביצירת תרבות ארגונית מעצימה המשיאה ערך הדדי לעובד ולארגון כאחד.
+        </p>
+      </section>
+
+      <!-- Experience -->
+      <section class="section">
+        <div class="sec-label">קריירה</div>
+        <div class="sec-title">ניסיון תעסוקתי</div>
+
+        <div class="jobs">
+
+          <div class="job current">
+            <div class="job-title">מנהל משאבי אנוש, פיקוד העורף</div>
+            <div class="job-meta">
+              <span class="job-org">צה"ל · פיקוד העורף</span>
+              <div class="job-sep"></div>
+              <span class="job-date">2024 – היום</span>
+              <span class="job-badge">דרגת רב סרן</span>
+            </div>
+            <ul class="job-list">
+              <li>ניהול, הובלה והתווית הדרך המקצועית עבור צוות מולטידיספלינרי בארגון המונה כ-8,000 קצינים במילואים.</li>
+              <li>ניהול תהליכי גיוס, מיון והערכה של מועמדים, קליטה והכשרה ראשונית.</li>
+              <li>פיתוח תכניות הכשרה, פיתוח מנהלים והעצמת עובדים.</li>
+              <li>תכנון והוצאה לפועל של הערכות ביצוע, משוב והערכת תרומות העובדים.</li>
+              <li>פיתוח נישת תומכי הלחימה בפיקוד העורף תוך בניית מסלולי קריירה.</li>
+              <li>ייזום ושיפור מתמיד של תהליכי HR, כולל ניהול מדדים ו-KPIs.</li>
+            </ul>
+          </div>
+
+          <div class="job">
+            <div class="job-title">מנהל משאבי אנוש, המכללה הלאומית לאיתנות ישראלית</div>
+            <div class="job-meta">
+              <span class="job-org">צה"ל</span>
+              <div class="job-sep"></div>
+              <span class="job-date">2023 – 2024</span>
+            </div>
+            <ul class="job-list">
+              <li>ניהול, הובלה והתווית הדרך המקצועית עבור צוות מולטידיספלינרי בארגון המונה כ-200 אנשים.</li>
+              <li>תמיכה בהנהלה ובמנהלים בהטמעת תהליכי מנהיגות המעודדים מוטיבציה ומחויבות ארגונית.</li>
+              <li>מעקב וניתוח מדדי גיוס (KPI), שיפור תהליכים והבטחת חוויית מועמד איכותית.</li>
+              <li>ייזום והטמעת פעילויות להעצמת תרבות ארגונית חיובית המעודדת שיתוף פעולה ומחוברות.</li>
+              <li>ניהול מסלולי קליטה והכשרה ראשונית לעובדים חדשים, להבטחת התאקלמות חלקה ומהירה.</li>
+              <li>בניית תהליכים ויוזמות לשימור עובדים, כולל תוכניות הכרה והערכה.</li>
+            </ul>
+          </div>
+
+          <div class="job">
+            <div class="job-title">ייעוץ לבכירים בצה"ל, יחידת מופ"ת</div>
+            <div class="job-meta">
+              <span class="job-org">צה"ל</span>
+              <div class="job-sep"></div>
+              <span class="job-date">2021 – 2023</span>
+            </div>
+            <ul class="job-list">
+              <li>ניהול, הובלה והתווית הדרך המקצועית עבור צוות בתחום משאבי האנוש.</li>
+              <li>ליווי וייעוץ לקראת המעבר לאזרחות עבור הדרג הבכיר בצה"ל (למעלה מ-2,000 קצינים).</li>
+              <li>פיתוח, יישום וניהול מדיניות לקראת תהליך הפרישה; תנאי הפרישה, זכויות, מסלולי תעסוקה והכוונה.</li>
+              <li>ייזום פרקטיקות עבודה חדשות שהביאו לחסכון בזמן והרחבת השירות לעובדים.</li>
+              <li>תכנון וליווי עובדים לקראת פרישה, כולל ייעוץ והכנת מסמכים.</li>
+            </ul>
+          </div>
+
+          <div class="job">
+            <div class="job-title">קצין משאבי אנוש – מחלקת אוכלוסיה, פיקוד העורף</div>
+            <div class="job-meta">
+              <span class="job-org">צה"ל</span>
+              <div class="job-sep"></div>
+              <span class="job-date">2021</span>
+            </div>
+            <ul class="job-list">
+              <li>הובלת מדיניות משאבי אנוש ובניית תכניות עבודה בהתאם לאסטרטגיה הארגונית עבור כ-500 אנשים.</li>
+              <li>אחריות מלאה למעגל חיי העובד, כולל תמיכה יומיומית במנהלים ובעובדים.</li>
+              <li>פיתוח ויישום מדיניות משאבי אנוש בהתאם ליעדי היחידה והארגון.</li>
+              <li>הובלת תהליך האיתור והגיוס של אנשים, תוך חשיבה יצירתית לאיתור כישרונות מיחידות שונות בצה"ל.</li>
+            </ul>
+          </div>
+
+          <div class="job">
+            <div class="job-title">קצין משאבי אנוש, יחידת חילוץ ארצית ומרכז המידע</div>
+            <div class="job-meta">
+              <span class="job-org">פיקוד העורף, צה"ל</span>
+              <div class="job-sep"></div>
+              <span class="job-date">2019 – 2020</span>
+              <span class="job-badge award">מצטיין נשיא</span>
+            </div>
+            <ul class="job-list">
+              <li>גיוס אנשי מילואים; רופאים, מהנדסים, פסיכולוגים וכו' לטובת משלחות ברחבי העולם ובארץ לחילוץ ואיתור נפגעים.</li>
+              <li>ניהול אירועים בזמן אמת ומתן פתרונות מהירים לסוגיות מתואמות בין הצדדים.</li>
+              <li>יצירת הלימה אופטימלית בין הצרכים המבצעים של צה"ל לבין המקצועיות וההכשרות של אנשי המילואים.</li>
+            </ul>
+          </div>
+
+          <div class="job">
+            <div class="job-title">ראש תחום מיונים ושיבוצים</div>
+            <div class="job-meta">
+              <span class="job-org">מיטב | תל השומר</span>
+              <div class="job-sep"></div>
+              <span class="job-date">2018 – 2019</span>
+            </div>
+            <ul class="job-list">
+              <li>אחריות על תחום מיונים ליחידות מיוחדות במודיעין ותלפיות.</li>
+              <li>ניתוח נתונים של המועמדים, איתור מלש"בים מובילים וחיבורם לתהליכי הגיוס והמיון עד לקביעת מועד הגיוס.</li>
+            </ul>
+          </div>
+
+        </div>
+      </section>
+    </main>
+
+    <!-- SIDEBAR -->
+    <aside class="cv-side">
+
+      <div class="side-block">
+        <span class="side-label">השכלה</span>
+        <div class="edu-degree">B.A. בניהול משאבי אנוש</div>
+        <div class="edu-inst">אוניברסיטת בר אילן</div>
+        <div class="edu-year">2025 – 2026</div>
+      </div>
+
+      <div class="side-block">
+        <span class="side-label">שפות</span>
+        <div class="lang-item">
+          <div class="lang-top">
+            <span class="lang-name">עברית</span>
+            <span class="lang-lvl">שפת אם</span>
+          </div>
+          <div class="lang-bar"><div class="lang-fill" style="width:100%"></div></div>
+        </div>
+        <div class="lang-item">
+          <div class="lang-top">
+            <span class="lang-name">אנגלית</span>
+            <span class="lang-lvl">רמה טובה</span>
+          </div>
+          <div class="lang-bar"><div class="lang-fill" style="width:68%"></div></div>
+        </div>
+      </div>
+
+      <div class="side-block">
+        <span class="side-label">תחומי מומחיות</span>
+        <div class="skills-grid">
+          <span class="skill">HRBP אסטרטגי</span>
+          <span class="skill">גיוס ומיון</span>
+          <span class="skill">Talent Acquisition</span>
+          <span class="skill">ניהול ביצועים</span>
+          <span class="skill">פיתוח מנהלים</span>
+          <span class="skill">שימור עובדים</span>
+          <span class="skill">תרבות ארגונית</span>
+          <span class="skill">KPI & Data</span>
+          <span class="skill">שינוי ארגוני</span>
+          <span class="skill">Employee Journey</span>
+          <span class="skill">מסלולי קריירה</span>
+          <span class="skill">הכשרה ופיתוח</span>
+        </div>
+      </div>
+
+      <div class="side-block">
+        <span class="side-label">הישגים</span>
+        <div class="award-card">
+          <div class="award-icon">&#9733;</div>
+          <div>
+            <div class="award-name">מצטיין נשיא</div>
+            <div class="award-detail">פיקוד העורף, צה"ל · 2020</div>
+          </div>
+        </div>
+      </div>
+
+    </aside>
+  </div>
+
+</div>
+</body>
+</html>
